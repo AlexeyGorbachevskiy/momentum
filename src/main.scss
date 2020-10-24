@@ -1,0 +1,143 @@
+@import "~normalize.css";
+
+//$main-color: #e9e0c0;
+//$main-color: #ddd5bc;
+//$puzzle-color: #85aa53;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0 10%;
+
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #ffffff;
+  transition: background-image 1s ease-in-out 0.1s;
+
+
+  .refresh {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+      color: #42dbaf;
+    }
+
+    @media (max-width: 700px) {
+      & {
+        font-size: 0.5rem;
+      }
+    }
+
+  }
+
+
+  .time {
+    font-size: 8rem;
+    @media (max-width: 700px) {
+      & {
+        font-size: 4rem;
+      }
+    }
+  }
+
+  .dayOfWeek {
+    font-size: 3rem;
+    @media (max-width: 700px) {
+      & {
+        font-size: 1.5rem;
+      }
+
+    }
+  }
+
+  h1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 2rem;
+
+    .name {
+      color: #00fadc;
+      outline: none;
+      word-break: break-word;
+      font-weight: 900;
+    }
+  }
+
+  h2 {
+    margin-bottom: 0.5rem;
+    //opacity: 0.8;
+    font-size: 2rem;
+    word-break: break-word;
+  }
+
+  .changeQuote{
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all .3s ease-in-out;
+    &:hover {
+      color: #42dbaf;
+    }
+
+  }
+
+  .quoteWrapper{
+
+    min-height: 20%;
+    //color: #00fadc;
+    color: #ffffff;
+
+    .quote {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Book Antiqua", sans-serif;
+      //transition: all .5s linear;
+    }
+    .quoteAuthor {
+      font-size: 1.5rem;
+      font-style: italic;
+      font-family: "Book Antiqua", sans-serif;
+      //transition: all .5s linear;
+      //margin-top: 1rem;
+    }
+
+  }
+
+
+
+  .focus {
+    color: #00fadc;
+    outline: none;
+    margin-top: 0.5rem;
+    font-weight: 900;
+  }
+
+
+}
+
+
+
