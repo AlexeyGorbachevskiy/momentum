@@ -8,7 +8,7 @@
 
 ## Task 2. Momentum
 
-![screenshot](images/momentum.png)
+![screenshot](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/ready-projects/images/momentum.png)
 
 Momentum - аналог [одноимённого приложения](https://chrome.google.com/webstore/detail/momentum/laookkfknpbbblfpciffpaejjkokdgca?hl=ru) интернет-магазина Chrome. Приложение показывает время и имя пользователя, его цель на текущий день. Фоновое изображение меняется в зависимости от времени суток. Для хранения данных приложение использует локальное хранилище - local storage. Автор - Brad Traversy - известен качеством своих туториалов. Именно этот — довольно короткий, и достаточно простой. Выполняя проект вы научитесь работать с датой и временем, создавать часы, сохранять данные в local storage и, самое главное, на конкретных примерах познакомитесь с асинхронными запросами. 
 
