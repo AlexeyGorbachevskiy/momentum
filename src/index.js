@@ -11,14 +11,136 @@ if (currentHour === 0) {
     currentHour = 24;
 }
 
+
+// Toggle weather
+const toggleWeatherBtn = document.querySelector('.toggle-btn');
+toggleWeatherBtn.addEventListener('click', () => {
+    document.querySelector('.weather-toggle-container').classList.toggle('weather-toggle-container_visible');
+    document.querySelector('.weather-toggle-container').classList.toggle('weather-toggle-container_invisible');
+})
+
+function toggleWeather() {
+    if (document.body.clientWidth < 1000) {
+        document.querySelector('.weather-toggle-container').classList.remove('weather-toggle-container_visible');
+        document.querySelector('.weather-toggle-container').classList.add('weather-toggle-container_invisible');
+    } else {
+        document.querySelector('.weather-toggle-container').classList.add('weather-toggle-container_visible');
+        document.querySelector('.weather-toggle-container').classList.remove('weather-toggle-container_invisible');
+    }
+}
+
+window.addEventListener('resize', () => {
+    toggleWeather()
+});
+window.addEventListener('DOMContentLoaded', () => {
+    toggleWeather()
+});
+
+
+// Get weather
+let prevCity = 'Minsk';
+let newCity = '';
+const city = document.querySelector('.city');
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const humidity = document.querySelector('.humidity');
+const windSpeed = document.querySelector('.windSpeed');
+const weatherDescription = document.querySelector('.weather-description');
+const weatherImg = document.querySelector('.weather-icon');
+
+// Clear city
+
+function clearCity(e) {
+    e.target.innerText = '';
+}
+
+// Set city on blur
+function setCityOnBlur(e) {
+    if (e.target.innerText.trim() === '') {
+        e.target.innerText = prevCity;
+    } else {
+        newCity = e.target.innerText.trim();
+        getWeather();
+    }
+
+    city.blur();
+}
+
+
+// Set city
+function setCity(e) {
+    if (e.code === 'Enter') {
+        if (e.target.innerText.trim() === '') {
+            e.target.innerText = prevCity;
+        } else {
+            newCity = e.target.innerText.trim();
+            getWeather();
+        }
+
+        city.blur();
+    }
+}
+
+city.addEventListener('keypress', setCity);
+city.addEventListener('click', clearCity);
+city.addEventListener('blur', setCityOnBlur);
+
+
+async function getWeather() {
+
+    let cityFromLS = JSON.parse(localStorage.getItem('city'));
+    if (cityFromLS) {
+        prevCity = `${cityFromLS}`;
+    }
+
+    if (newCity) {
+        city.textContent = newCity;
+    } else {
+        city.textContent = prevCity;
+    }
+
+
+    try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=en&appid=4dbe5b6f0197c71ad67531d031a966a6&units=metric`;
+        const res = await fetch(url);
+        const data = await res.json();
+        weatherImg.setAttribute('src', `http://openweathermap.org/img/w/${data.weather[0].icon}.png`);
+        weatherImg.setAttribute('alt', 'Weather icon should have been located here');
+        document.querySelector('.weather-wrapper').appendChild(weatherImg)
+        // weatherImg.classList.add('weather-icon');
+
+        // weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        temperature.textContent = `temperature: ${data.main.temp}°C`;
+        humidity.textContent = `humidity: ${data.main.humidity}%`;
+        windSpeed.textContent = `wind: ${data.wind.speed} m/s`;
+        weatherDescription.textContent = `${data.weather[0].description}`;
+
+        localStorage.setItem('city', JSON.stringify(city.textContent))
+    } catch (e) {
+        document.querySelector('.weather-wrapper').style.minHeight = '100px';
+        document.querySelector('.weather-wrapper').style.display = 'flex';
+        document.querySelector('.weather-wrapper').style.justifyContent = 'center';
+        document.querySelector('.weather-wrapper').style.alignItems = 'center';
+        document.querySelector('.weather-wrapper').innerHTML = `<div>${e.message} - Try to reload page</div>`;
+    }
+
+}
+
+getWeather();
+
+
 // Change Quote
 const changeQuote = document.querySelector('.changeQuote');
 changeQuote.addEventListener('click', () => {
     changeQuote.disabled = true;
+    changeQuote.style.color = 'grey';
+    changeQuote.style.opacity = '0.5';
     showQuote(true);
+
     setTimeout(function () {
-        changeQuote.disabled = false
-    }, 1000);
+        changeQuote.disabled = false;
+        changeQuote.removeAttribute('style');
+    }, 1500);
 });
 
 
@@ -40,11 +162,11 @@ async function showQuote(isChangeClicked = false) {
         if (data.quote.body.length > 80) {
             showQuote();
         } else {
-            document.querySelector('.quote').textContent = data.quote.body;
+            document.querySelector('.quote').textContent = `"${data.quote.body}"`;
             document.querySelector('.quoteAuthor').textContent = data.quote.author;
         }
     } catch (e) {
-        console.log(e.message);
+        document.querySelector('.quote').textContent = `${e.message} - Try to change quote or reload page`
     }
 
 
@@ -82,10 +204,8 @@ let refresh = document.querySelector('.refresh')
 
 refresh.addEventListener('click', () => {
     refresh.disabled = true;
-    setTimeout(function () {
-        refresh.disabled = false
-    }, 1000);
-
+    refresh.style.opacity = '0.5'
+    refresh.style.color = 'grey'
 
     if (currentImageIndex < 5) {
         currentImageIndex++;
@@ -99,9 +219,14 @@ refresh.addEventListener('click', () => {
         currentTimesOfDay = 0;
     }
 
-
     document.body.style.backgroundImage =
         `url('src/assets/images/${imgFolder}/${addZero(images[currentTimesOfDay][currentImageIndex])}.jpg')`;
+
+    setTimeout(function () {
+        refresh.disabled = false;
+        refresh.removeAttribute("style");
+    }, 2000);
+
 })
 
 
@@ -111,6 +236,7 @@ const time = document.querySelector('.time'),
     name = document.querySelector('.name'),
     focus = document.querySelector('.focus'),
     dayOfWeek = document.querySelector('.dayOfWeek');
+
 
 // Options
 const showAmPm = false;
@@ -227,8 +353,10 @@ function getName() {
 // Check Name
 
 function checkName(e) {
-    prevName = e.target.innerText.trim();
-    e.target.innerText = '';
+    if (e.target.innerText.trim() !== '') {
+        prevName = e.target.innerText.trim();
+        e.target.innerText = '';
+    }
 }
 
 // Set Name
@@ -260,8 +388,10 @@ function getFocus() {
 
 // Check Focus
 function checkFocus(e) {
-    prevFocus = e.target.innerText.trim();
-    e.target.innerText = '';
+    if (e.target.innerText.trim() !== '') {
+        prevFocus = e.target.innerText.trim();
+        e.target.innerText = '';
+    }
 }
 
 function resetFocusOnEnter(e) {
