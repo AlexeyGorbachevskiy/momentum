@@ -9,23 +9,45 @@
     <link rel="shortcut icon" href="#"/>
 </head>
 <body>
-<button class="refresh"><i class="fa fa-sync-alt fa-4x" aria-hidden="true"></i></button>
 
-<time class="time"></time>
-<div class="dayOfWeek"></div>
-<h1>
-    <span class="greeting"></span>
-    &nbsp<span class="name" contenteditable="true"></span>
-</h1>
-<h2>What Is Your Focus For Today?</h2>
-<h2 class="focus" contenteditable="true"></h2>
+<div class="main-wrapper">
+    <button class="refresh"><i class="fa fa-sync-alt fa-3x" aria-hidden="true"></i></button>
 
-<span class="changeQuote"> <i class="fa fa-sync-alt fa-2x" aria-hidden="true"></i> </span>
-<div class="quoteWrapper">
-    <h2 class="quote">
-        <i class="fas fa-spinner fa-spin"></i>
-    </h2>
-    <h3 class="quoteAuthor"></h3>
+
+    <div class="weather-toggle-container weather-toggle-container_visible">
+        <div class="toggle-btn">
+            <i class="fa fa-cog"></i>
+        </div>
+        <div class="weather-wrapper">
+            <h3 class="weather-title">Weather</h3>
+            <div class="city" contenteditable="true"></div>
+            <div class="temperature"></div>
+            <div class="humidity"></div>
+            <div class="windSpeed"></div>
+            <div class="weather-description"></div>
+            <img class="weather-icon" src="" alt=""/>
+            <!--        <i class="weather-icon owf"></i>-->
+        </div>
+    </div>
+
+
+    <div class="dayOfWeek"></div>
+    <time class="time"></time>
+    <h1>
+        <span class="greeting"></span>
+        &nbsp<span class="name" contenteditable="true"></span>
+    </h1>
+    <h2>What Is Your Focus For Today?</h2>
+    <h2 class="focus" contenteditable="true"></h2>
+
+
+    <button class="changeQuote"> <i class="fa fa-sync-alt fa-2x" aria-hidden="true"></i> </button>
+    <div class="quoteWrapper">
+        <h2 class="quote">
+            <i class="fas fa-spinner fa-spin"></i>
+        </h2>
+        <h3 class="quoteAuthor"></h3>
+    </div>
 </div>
 
 

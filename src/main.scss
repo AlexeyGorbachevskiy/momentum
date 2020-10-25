@@ -8,132 +8,321 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Dubai Medium", sans-serif;
 }
 
 body {
-  padding: 0 10%;
 
-  font-family: 'Quicksand', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   height: 100vh;
+  font-family: 'Quicksand', sans-serif;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   color: #ffffff;
-  transition: background-image 1s ease-in-out 0.1s;
+  transition: background-image 1s ease-in-out 0.5s;
 
+  //&:after{
+  //  content:'';
+  //  position: absolute;
+  //  width: 100%;
+  //  height: 100%;
+  //  background-color: rgba(0, 0, 0, 0.3);
+  //
+  //}
 
-  .refresh {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    background-color: transparent;
-    color: #ffffff;
-    font-size: 1rem;
-    transition: all .3s ease-in-out;
-
-    &:hover {
-      color: #42dbaf;
-    }
-
-    @media (max-width: 700px) {
-      & {
-        font-size: 0.5rem;
-      }
-    }
-
-  }
-
-
-  .time {
-    font-size: 8rem;
-    @media (max-width: 700px) {
-      & {
-        font-size: 4rem;
-      }
-    }
-  }
-
-  .dayOfWeek {
-    font-size: 3rem;
-    @media (max-width: 700px) {
-      & {
-        font-size: 1.5rem;
-      }
-
-    }
-  }
-
-  h1 {
+  .main-wrapper {
+    padding: 0 10%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 
-    margin-bottom: 2rem;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
 
-    .name {
+
+    .weather-toggle-container {
+      width: 200px;
+      position: fixed;
+      //right: -175px;
+      top: 5%;
+      transition: all .5s ease;
+      z-index: 1000;
+      overflow: visible;
+      //@media screen and (max-width: 767px) {
+      //  top: 15%;
+      //}
+
+
+      .toggle-btn {
+        cursor: pointer;
+        position: absolute;
+        //top: 20px;
+        left: -25px;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        //border: 1px solid #d5d5d5;
+        border: none;
+        //overflow: visible;
+        color: #00fadc;
+
+        svg {
+          //font-size: 32px;
+          font-size: 2.5rem;
+          line-height: 38px;
+
+          animation-name: settings;
+          animation-duration: 2.5s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear;
+          overflow: visible;
+
+          @media (max-width: 750px) {
+            & {
+              font-size: 2rem;
+            }
+          }
+          @media (max-width: 500px) {
+            & {
+              font-size: 1.5rem;
+            }
+          }
+
+          @keyframes settings {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+
+      .weather-wrapper {
+        //padding: 0 1%;
+        width: 170px;
+
+        position: absolute;
+        top: 5%;
+        right: 2%;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 20px;
+
+
+        font-size: 1rem;
+
+        .weather-title {
+          margin-top: 1.5rem;
+        }
+
+        .city {
+          margin: 1.5rem 0;
+
+          font-size: 1.5rem;
+          cursor: pointer;
+          outline: none;
+          color: #00fadc;
+        }
+
+        .temperature {
+          margin-bottom: 0.5rem;
+        }
+
+        .humidity {
+          margin-bottom: 0.5rem;
+        }
+
+        .windSpeed {
+          margin-bottom: 0.5rem;
+        }
+
+        .weather-description {
+          margin-bottom: 0.5rem;
+        }
+
+        .weather-icon {
+          margin-bottom: 0.5rem;
+        }
+
+
+      }
+
+    }
+
+    .weather-toggle-container_visible{
+      right: 1%;
+    }
+    .weather-toggle-container_invisible{
+      right: -175px;
+    }
+
+
+    .refresh {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      color: #ffffff;
+      font-size: 1rem;
+      transition: all .3s ease-in-out;
+
+      &:hover {
+        color: #42dbaf;
+      }
+
+      @media (max-width: 750px) {
+        & {
+          font-size: 0.7rem;
+        }
+      }
+
+    }
+
+
+    .time {
+      font-size: 8rem;
+      @media (max-width: 750px) {
+        & {
+          font-size: 4rem;
+        }
+      }
+      @media (max-width: 500px) {
+        & {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    .dayOfWeek {
+      font-size: 3rem;
+      @media (max-width: 750px) {
+        & {
+          font-size: 1.5rem;
+        }
+      }
+      @media (max-width: 500px) {
+        & {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    h1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+
+      margin-bottom: 2rem;
+
+      @media (max-width: 500px) {
+        & {
+          font-size: 1.5rem;
+        }
+      }
+
+
+      .name {
+        min-width: 1px;
+        //text-align: left;
+        cursor: pointer;
+        color: #00fadc;
+        outline: none;
+        word-break: break-word;
+        font-weight: 900;
+
+      }
+    }
+
+
+    h2 {
+      margin-bottom: 0.5rem;
+      //opacity: 0.8;
+      font-size: 2rem;
+      word-break: break-word;
+      @media (max-width: 500px) {
+        & {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .changeQuote {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #ffffff;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: all .3s ease-in-out;
+      @media (max-width: 500px) {
+        & {
+          font-size: 0.7rem;
+        }
+      }
+
+      &:hover {
+        color: #42dbaf;
+      }
+
+    }
+
+    .quoteWrapper {
+
+      height: 20%;
+      //color: #00fadc;
+      color: #ffffff;
+      @media screen and (max-width: 600px) {
+        height: 25%;
+      }
+
+
+      .quote {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        font-style: italic;
+        font-family: "Book Antiqua", sans-serif;
+        //transition: all .5s linear;
+        @media (max-width: 500px) {
+          & {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      .quoteAuthor {
+        font-size: 1.5rem;
+        font-style: italic;
+        font-family: "Book Antiqua", sans-serif;
+        //transition: all .5s linear;
+        //margin-top: 1rem;
+        @media (max-width: 500px) {
+          & {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+    }
+
+
+    .focus {
+      min-width: 1px;
+      cursor: pointer;
       color: #00fadc;
       outline: none;
-      word-break: break-word;
+      margin-top: 0.5rem;
       font-weight: 900;
     }
-  }
-
-  h2 {
-    margin-bottom: 0.5rem;
-    //opacity: 0.8;
-    font-size: 2rem;
-    word-break: break-word;
-  }
-
-  .changeQuote{
-    cursor: pointer;
-    margin-top: 2rem;
-    transition: all .3s ease-in-out;
-    &:hover {
-      color: #42dbaf;
-    }
-
-  }
-
-  .quoteWrapper{
-
-    min-height: 20%;
-    //color: #00fadc;
-    color: #ffffff;
-
-    .quote {
-      margin-top: 1rem;
-      font-size: 1.5rem;
-      font-style: italic;
-      font-family: "Book Antiqua", sans-serif;
-      //transition: all .5s linear;
-    }
-    .quoteAuthor {
-      font-size: 1.5rem;
-      font-style: italic;
-      font-family: "Book Antiqua", sans-serif;
-      //transition: all .5s linear;
-      //margin-top: 1rem;
-    }
-
-  }
 
 
-
-  .focus {
-    color: #00fadc;
-    outline: none;
-    margin-top: 0.5rem;
-    font-weight: 900;
   }
 
 
